@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://va1mulm0dll6"]
 
-[ext_resource type="Texture2D" uid="uid://rylrmwj35cun" path="res://Assets/accSizeTiles.png" id="1_7yhko"]
+[ext_resource type="Texture2D" uid="uid://1x2tfcsj3w7s" path="res://Assets/tileMap (1).png" id="1_7yhko"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1n30v"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7yhko"]
 texture = ExtResource("1_7yhko")
-texture_region_size = Vector2i(5, 5)
+texture_region_size = Vector2i(25, 25)
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -18,12 +18,12 @@ texture_region_size = Vector2i(5, 5)
 2:1/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_ykcdr"]
-tile_size = Vector2i(5, 5)
-sources/1 = SubResource("TileSetAtlasSource_1n30v")
+tile_size = Vector2i(25, 25)
+sources/4 = SubResource("TileSetAtlasSource_7yhko")
 
 [node name="TileMap" type="TileMap" unique_id=1159993566]
 tile_set = SubResource("TileSet_ykcdr")
-rendering_quadrant_size = 5
+rendering_quadrant_size = 25
 format = 2
 layer_0/name = "Mines"
 layer_1/name = "Ground"
