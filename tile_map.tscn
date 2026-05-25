@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://va1mulm0dll6"]
+
+[sub_resource type="TileSet" id="TileSet_ykcdr"]
+tile_size = Vector2i(5, 5)
+
+[node name="TileMap" type="TileMap" unique_id=1159993566]
+tile_set = SubResource("TileSet_ykcdr")
+rendering_quadrant_size = 5
+format = 2
+layer_0/name = "Mines"
+layer_1/name = "Ground"
+layer_2/name = "Bomb"
+layer_3/name = "Flags"
+layer_4/name = "Hover"

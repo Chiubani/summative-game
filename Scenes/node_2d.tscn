@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://n4dpll8patgf"]
 
-[ext_resource type="Texture2D" uid="uid://nufi2m76d3d" path="res://icon.svg" id="1_wtcfe"]
+[ext_resource type="Texture2D" uid="uid://brk7jji5jc3ab" path="res://Assets/bg.png" id="1_j2wod"]
 
-[node name="Node2D" type="Node2D" unique_id=1861256295]
+[node name="Background" type="Sprite2D" unique_id=1014656936]
 
-[node name="Icon" type="Sprite2D" parent="." unique_id=748584596]
-position = Vector2(67, 67)
-texture = ExtResource("1_wtcfe")
+[node name="Bg" type="Sprite2D" parent="." unique_id=962291076]
+position = Vector2(374, 352)
+texture = ExtResource("1_j2wod")
