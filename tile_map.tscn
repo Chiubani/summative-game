@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://va1mulm0dll6"]
 
 [ext_resource type="Texture2D" uid="uid://1x2tfcsj3w7s" path="res://Assets/tileMap (1).png" id="1_7yhko"]
+[ext_resource type="Script" uid="uid://t65munoeuqy0" path="res://Effects.cs" id="2_1n30v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7yhko"]
 resource_name = "tiles"
@@ -51,6 +52,7 @@ collision_enabled = false
 [node name="Effects" type="TileMapLayer" parent="TileMap/underLayer" unique_id=1194568508]
 tile_set = SubResource("TileSet_1n30v")
 collision_enabled = false
+script = ExtResource("2_1n30v")
 
 [node name="stoneLayer" type="TileMapLayer" parent="TileMap" unique_id=869004843]
 position = Vector2(330, 330)
