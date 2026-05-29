@@ -1,8 +1,7 @@
 using Godot;
 using System;
 
-public partial class Effects : TileMapLayer
-{
+public partial class Effects : TileMapLayer{
 	public Effects(){}
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready(){

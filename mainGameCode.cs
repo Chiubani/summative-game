@@ -1,9 +1,10 @@
 using Godot;
 using System;
 
-public partial class mainGameCode : Node2D
-{
-	public mainGameCode(){}
+public partial class MainGameCode : Node2D{
+	public mainGameCode(){
+		Random rnd = new Random();
+	}
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -17,7 +18,7 @@ public partial class mainGameCode : Node2D
 		//Loop places bombs in 
 		for(int b = 0; b<bombsAmount; b++){
 			do{
-				bombR = Math.round(15*Math.random()+1);
+				bombR = rnd.Next(1,16);
 				bombC = Math.round(15*Math.random()+1);
 			} while(bombThere(bombX,bombY,bombLocation,b));
 			gameMap[bombR][bombC] = -2;
@@ -32,7 +33,7 @@ public partial class mainGameCode : Node2D
 	}
 		
 	//Making sure multiple bombs are not placed in the same square by checking if a bomb of same coordinates has been placed in one of the squares
-	public boolean bombThere(int bombR, int bombC, int arr, int b){
+	public boolean bombThere(int bombR, int bombC, int[][] arr, int b){
 		for(int i = 0; i<b;i++){
 			//if 
 			if(arr[0][i]==bombR && arr[1][i]==bombC){
