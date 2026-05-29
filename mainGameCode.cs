@@ -19,7 +19,7 @@ public partial class MainGameCode : Node2D{
 		for(int b = 0; b<bombsAmount; b++){
 			do{
 				bombR = rnd.Next(1,16);
-				bombC = Math.round(15*Math.random()+1);
+				bombC = rnd.Next(1,16);
 			} while(bombThere(bombX,bombY,bombLocation,b));
 			gameMap[bombR][bombC] = -2;
 			bombLocation[0][b] = bombR;
