@@ -3,6 +3,7 @@ using System;
 
 public partial class mainGameCode : Node2D
 {
+	public mainGameCode(){}
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -22,6 +23,11 @@ public partial class mainGameCode : Node2D
 			gameMap[bombR][bombC] = -2;
 			bombLocation[0][b] = bombR;
 			bombLocation[1][b] = bombC;
+		}
+		for(int r = 0; r<15; r++){
+			for (int c = 0; c<15; c++){
+				Console.WriteLine(gameMap[r][c]);
+			}
 		}
 	}
 		
