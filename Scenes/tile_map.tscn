@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://va1mulm0dll6"]
 
 [ext_resource type="Texture2D" uid="uid://1x2tfcsj3w7s" path="res://Assets/tileMap (1).png" id="1_7yhko"]
-[ext_resource type="Script" uid="uid://bngmlw7aevqy2" path="res://mainGameCode.cs" id="1_35kre"]
-[ext_resource type="Script" uid="uid://t65munoeuqy0" path="res://Effects.cs" id="2_1n30v"]
+[ext_resource type="Script" uid="uid://bngmlw7aevqy2" path="res://Scripts/mainGameCode.cs" id="1_35kre"]
+[ext_resource type="Script" uid="uid://t65munoeuqy0" path="res://Scripts/Effects.cs" id="2_1n30v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7yhko"]
 resource_name = "tiles"
