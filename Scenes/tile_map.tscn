@@ -1,12 +1,12 @@
 [gd_scene format=4 uid="uid://va1mulm0dll6"]
 
-[ext_resource type="Texture2D" uid="uid://1x2tfcsj3w7s" path="res://Assets/tileMap (1).png" id="1_7yhko"]
-[ext_resource type="Script" uid="uid://bngmlw7aevqy2" path="res://Scripts/mainGameCode.cs" id="1_35kre"]
-[ext_resource type="Script" uid="uid://t65munoeuqy0" path="res://Scripts/Effects.cs" id="2_1n30v"]
+[ext_resource type="Script" uid="uid://bngmlw7aevqy2" path="res://Scripts/mainGameCode.cs" id="1_drmie"]
+[ext_resource type="Texture2D" uid="uid://1x2tfcsj3w7s" path="res://Assets/tileMap (1).png" id="2_0v1hq"]
+[ext_resource type="Script" uid="uid://t65munoeuqy0" path="res://Scripts/Effects.cs" id="3_rlxc1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7yhko"]
 resource_name = "tiles"
-texture = ExtResource("1_7yhko")
+texture = ExtResource("2_0v1hq")
 texture_region_size = Vector2i(25, 25)
 0:0/0 = 0
 1:0/0 = 0
@@ -15,7 +15,7 @@ texture_region_size = Vector2i(25, 25)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1n30v"]
 resource_name = "indicators"
-texture = ExtResource("1_7yhko")
+texture = ExtResource("2_0v1hq")
 texture_region_size = Vector2i(25, 25)
 4:0/0 = 0
 4:0/0/custom_data_0 = -2
@@ -40,7 +40,7 @@ sources/0 = SubResource("TileSetAtlasSource_7yhko")
 sources/1 = SubResource("TileSetAtlasSource_1n30v")
 
 [node name="mainGame" type="Node2D" unique_id=1617479273]
-script = ExtResource("1_35kre")
+script = ExtResource("1_drmie")
 
 [node name="TileMap" type="TileMap" parent="." unique_id=776511916]
 format = 2
@@ -55,7 +55,7 @@ collision_enabled = false
 [node name="Effects" type="TileMapLayer" parent="TileMap/underLayer" unique_id=1194568508]
 tile_set = SubResource("TileSet_1n30v")
 collision_enabled = false
-script = ExtResource("2_1n30v")
+script = ExtResource("3_rlxc1")
 
 [node name="stoneLayer" type="TileMapLayer" parent="TileMap" unique_id=869004843]
 position = Vector2(330, 330)
