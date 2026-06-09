@@ -3,8 +3,9 @@ using System;
 
 public partial class MainGameCode : Node2D{
 	public mainGameCode(){
-		static Random rnd = new Random();
+		
 	}
+	public static Random rnd = new Random();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready(){
 			int[,] gameMap = new int[15,15];
@@ -34,9 +35,9 @@ public partial class MainGameCode : Node2D{
 			
 			for(int r = 0; r<15; r++){
 				for (int c = 0; c<15; c++){
-					Console.Write(gameMap[r,c]);
+					GD.Print(gameMap[r,c]);
 				}
-				Console.WriteLine();
+				GD.PrintLine();
 			}
 		}
 		//Making sure multiple bombs are not placed in the same square by checking if a bomb of same coordinates has been placed in one of the squares
@@ -65,10 +66,9 @@ public partial class MainGameCode : Node2D{
 			 //Console.WriteLine(count);
 			 return count;
 		}
-	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
+	public override void _Process(double delta){
+	
 	}
 }
