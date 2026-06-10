@@ -2,18 +2,16 @@ using Godot;
 using System;
 
 public partial class Effects : TileMapLayer{
-	public Effects(){
+	//public Effects(){
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready(){
-		public enum number{
-			BOMB = -2,
-			NONE = 0,
-			FLAG = -1,
-			ONE = 1,
-			TWO = 2,
-			THREE = 3,
-			FOUR = 4,
-			FIVE = 5,
+		public enum TileType
+		{
+			Empty,
+			Bomb,
+			Treasure,
+			Forest
 		}
 	}
 		
@@ -28,4 +26,4 @@ public partial class Effects : TileMapLayer{
 	{
 	}
 }
-}
+//}

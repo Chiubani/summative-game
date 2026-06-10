@@ -1,10 +1,10 @@
 using Godot;
 using System;
 
-public partial class MainGameCode : Node2D{
-	public mainGameCode(){
+public partial class mainGameCode : Node2D{
+	/*public mainGameCode(){
 		
-	}
+	}*/
 	public static Random rnd = new Random();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready(){
@@ -37,7 +37,7 @@ public partial class MainGameCode : Node2D{
 				for (int c = 0; c<15; c++){
 					GD.Print(gameMap[r,c]);
 				}
-				GD.PrintLine();
+				GD.Print();
 			}
 		}
 		//Making sure multiple bombs are not placed in the same square by checking if a bomb of same coordinates has been placed in one of the squares
