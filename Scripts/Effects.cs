@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 public partial class Effects : TileMapLayer{
-	public Effects(){}
+	public Effects(){
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready(){
 		public enum number{
@@ -27,4 +27,5 @@ public partial class Effects : TileMapLayer{
 	public override void _Process(double delta)
 	{
 	}
+}
 }
