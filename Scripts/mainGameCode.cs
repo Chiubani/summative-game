@@ -2,9 +2,6 @@ using Godot;
 using System;
 
 public partial class mainGameCode : Node2D{
-	/*public mainGameCode(){
-		
-	}*/
 	public static Random rnd = new Random();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready(){
