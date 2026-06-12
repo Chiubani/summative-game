@@ -60,7 +60,6 @@ public partial class mainGameCode : Node2D{
 				}
 			 }
 			 
-			 //Console.WriteLine(count);
 			 return count;
 		}
 
