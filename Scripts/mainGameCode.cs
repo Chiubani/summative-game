@@ -5,10 +5,10 @@ public partial class mainGameCode : Node2D{
 	public static Random rnd = new Random();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready(){
-			public int[,] gameMap = new int[15,15];
-			int maxBombs = 55;
-			setupMap(gameMap,maxBombs);
-		}
+		public int[,] gameMap = new int[15,15];
+		int bombsAmount = 10;
+		setupMap(gameMap,bombsAmount);
+	}
 
 
 		//METHODS
@@ -16,11 +16,11 @@ public partial class mainGameCode : Node2D{
 		/*
 		1. Game Setup
 			Overview: bomb locations are decided, nearby numbers are placed. All starting game information is stored
-			
+
 		*/
-		public static void setupMap(int[,] gameMap){
+		public static void setupMap(int[,] gameMap, int bombsAmount){
 			int[,] bombLocation = new int[2,maxBombs]; //tracks where bombs have been placed with x and y coordinates so multiple aren't placed on same square
-			int bombsAmount = 10;
+			//int bombsAmount = 10;
 			int bombR = 0;
 			int bombC = 0;
 			
@@ -76,6 +76,31 @@ public partial class mainGameCode : Node2D{
 			 
 			 //Console.WriteLine(count);
 			 return count;
+		}
+
+		//Tile class, containing all properties of each tile
+		public class Tile{
+			int type;
+			int x;
+			int y;
+			boolean flagged;
+			boolean revealed;
+
+			public Tile(){
+				this.type = 0;
+				this.x = 0;
+				this.y = 0;
+				this.flagged = false;
+				this.revealed = false;
+			}
+
+			public Tile(int inputX, int inputY, int inputType){
+				this.x = inputX;
+				this.y = inputY;
+				this.type = inputType;
+				this.flagged = false;
+				this.revealed = false;
+			}
 		}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
