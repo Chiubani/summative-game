@@ -39,12 +39,7 @@ public partial class mainGameCode : Node2D{
 				}
 			}
 			
-			for(int r = 0; r<15; r++){
-				for (int c = 0; c<15; c++){
-					GD.Print(gameMap[r,c]);
-				}
-				GD.Print();
-			}
+			
 		}
 
 		/*
@@ -115,11 +110,11 @@ public partial class mainGameCode : Node2D{
 
 		//Tile class, containing all properties of each tile
 		public class Tile{
-			int type;
-			Vector2I position = new Vector2I(0,0);
-			bool flagged;
-			bool revealed;
-			bool isMine;
+			public int type;
+			public Vector2I position = new Vector2I(0,0);
+			public bool flagged;
+			public bool revealed;
+			public bool isMine;
 
 			public Tile(){
 				this.type = 0;
@@ -152,7 +147,7 @@ public partial class mainGameCode : Node2D{
 	public override void _Process(double delta){
 		if (Input.IsMouseButtonPressed(MouseButton.Left)){
 			Vector2 mousePos = GetViewport().GetMousePosition();
-			Vector2I pos = (Vector2I)mousePos.Floor();
+			Vector2I pos = (Vector2I)(mousePos/50);
 			for(int p = 0; p<15; p++){
 				for(int q = 0; q<15; q++){
 					if(pos == board[p,q].position){
@@ -160,6 +155,6 @@ public partial class mainGameCode : Node2D{
 					}
 				}
 			}
-    	}
+		}
 	}
 }
