@@ -100,11 +100,21 @@ public partial class mainGameCode : Node2D{
 			Overview: Assigning data to each tile in the tileMap
 		*/
 
-		public static void assignTiles(Tile[,] map){
+		public static void assignTiles(Tile[,] gameBoard){
 			int x = -7;
 			int y = -7;
-			
+			int tileType = 0;
+			for(int i = 0; i<15; i++){
+				for(int j = 0; j<15; j++){
+					gameBoard[i,j] = new Tile(x,y,gameMap[i,j]);
+				}
+			}
 		}
+
+		/*
+
+
+		*/
 
 		//Tile class, containing all properties of each tile
 		public class Tile{
