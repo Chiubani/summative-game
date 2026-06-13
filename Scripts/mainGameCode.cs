@@ -101,6 +101,8 @@ public partial class mainGameCode : Node2D{
 		*/
 
 		public static void assignTiles(Tile[,] map){
+			int x = -7;
+			int y = -7;
 			
 		}
 
@@ -120,8 +122,7 @@ public partial class mainGameCode : Node2D{
 			}
 
 			public Tile(int inputX, int inputY, int inputType){
-				this.x = inputX;
-				this.y = inputY;
+				this.position = Vector2I(inputX,inputY);
 				this.type = inputType;
 				this.flagged = false;
 				this.revealed = false;
