@@ -2,16 +2,10 @@ using Godot;
 using System;
 
 public partial class mainGameCode : Node2D{
-	public static Random rnd = new Random();
+	public Random rnd = new Random();
 	// Called when the node enters the scene tree for the first time.
-	public override void _Ready(){
-		public int[,] gameMap = new int[15,15];
-		int bombsAmount = 10;
-		setupMap(gameMap,bombsAmount);
-		Tile[,] board = new Tile[15,15];
-		assignTiles(board);
-	}
-
+	public int[,] gameMap = new int[15,15];
+	public Tile[,] board = new Tile[15,15];
 
 		//METHODS
 
@@ -20,8 +14,8 @@ public partial class mainGameCode : Node2D{
 			Overview: bomb locations are decided, nearby numbers are placed. All starting game information is stored
 
 		*/
-		public static void setupMap(int[,] gameMap, int bombsAmount){
-			int[,] bombLocation = new int[2,maxBombs]; //tracks where bombs have been placed with x and y coordinates so multiple aren't placed on same square
+		public void setupMap(int[,] gameMap, int bombsAmount){
+			int[,] bombLocation = new int[2,bombsAmount]; //tracks where bombs have been placed with x and y coordinates so multiple aren't placed on same square
 			//int bombsAmount = 10;
 			int bombR = 0;
 			int bombC = 0;
@@ -58,7 +52,7 @@ public partial class mainGameCode : Node2D{
 			Overview: Ensuring multiple bombs are not placed in the same square by checking if a bomb of same coordinates has already been placed in one of the squares
 		*/
 
-		public static bool bombThere(int bombR, int bombC, int[,] arr, int b){
+		public bool bombThere(int bombR, int bombC, int[,] arr, int b){
 			for(int i = 0; i<b;i++){
 				if(arr[0,i]==bombR && arr[1,i]==bombC){
 					return true;
@@ -72,7 +66,7 @@ public partial class mainGameCode : Node2D{
 			Overview: Counting number of bombs around the square to put into the gameMap array. This will eventually be the number on this square in the actual game, if any
 		*/
 		
-		public static int getSquareNo(int ogX, int ogY, int[,] map){
+		public int getSquareNo(int ogX, int ogY, int[,] map){
 			int count = 0;
 			
 			/* Explanation:
@@ -100,14 +94,17 @@ public partial class mainGameCode : Node2D{
 			Overview: Assigning data to each tile in the tileMap
 		*/
 
-		public static void assignTiles(Tile[,] gameBoard){
+		public void assignTiles(Tile[,] gameBoard){
 			int x = -7;
 			int y = -7;
 			int tileType = 0;
 			for(int i = 0; i<15; i++){
 				for(int j = 0; j<15; j++){
 					gameBoard[i,j] = new Tile(x,y,gameMap[i,j]);
+					y++;
 				}
+				x++;
+				y = -7;
 			}
 		}
 
@@ -120,15 +117,16 @@ public partial class mainGameCode : Node2D{
 		public class Tile{
 			int type;
 			Vector2I position;
-			boolean flagged;
-			boolean revealed;
+			bool flagged;
+			bool revealed;
+			bool isMine;
 
 			public Tile(){
 				this.type = 0;
-				this.x = 0;
-				this.y = 0;
+				this.position = Vector2I(0,0);
 				this.flagged = false;
 				this.revealed = false;
+				this.isMine = false;
 			}
 
 			public Tile(int inputX, int inputY, int inputType){
@@ -136,8 +134,19 @@ public partial class mainGameCode : Node2D{
 				this.type = inputType;
 				this.flagged = false;
 				this.revealed = false;
+				if(inputType == -2){
+					this.isMine = true;
+				} else{
+					this.isMine = false;
+				}
 			}
 		}
+
+	public override void _Ready(){
+		int bombsAmount = 10;
+		setupMap(gameMap,bombsAmount);
+		assignTiles(board);
+	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta){

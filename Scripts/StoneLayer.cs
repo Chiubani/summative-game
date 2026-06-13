@@ -1,4 +1,4 @@
-using Godot;
+/*using Godot;
 using System;
 
 public partial class StoneLayer : TileMapLayer
@@ -13,3 +13,4 @@ public partial class StoneLayer : TileMapLayer
 	{
 	}
 }
+*/
