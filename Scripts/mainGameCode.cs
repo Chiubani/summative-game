@@ -8,6 +8,8 @@ public partial class mainGameCode : Node2D{
 		public int[,] gameMap = new int[15,15];
 		int bombsAmount = 10;
 		setupMap(gameMap,bombsAmount);
+		Tile[,] board = new Tile[15,15];
+		assignTiles(board);
 	}
 
 
@@ -51,7 +53,11 @@ public partial class mainGameCode : Node2D{
 			}
 		}
 
-		//Making sure multiple bombs are not placed in the same square by checking if a bomb of same coordinates has been placed in one of the squares
+		/*
+		2. Bomb There
+			Overview: Ensuring multiple bombs are not placed in the same square by checking if a bomb of same coordinates has already been placed in one of the squares
+		*/
+
 		public static bool bombThere(int bombR, int bombC, int[,] arr, int b){
 			for(int i = 0; i<b;i++){
 				if(arr[0,i]==bombR && arr[1,i]==bombC){
@@ -60,10 +66,21 @@ public partial class mainGameCode : Node2D{
 			}
 			return false;
 		}
+
+		/*
+		3. Get Square Number
+			Overview: Counting number of bombs around the square to put into the gameMap array. This will eventually be the number on this square in the actual game, if any
+		*/
 		
 		public static int getSquareNo(int ogX, int ogY, int[,] map){
 			int count = 0;
 			
+			/* Explanation:
+				ogX is the x value of this square. a represents moving away from the current tile horizontally. ogX - 1 would check one of the squares to the left of x, and ogX+1 would chec one of the squares to the right
+				ogY is the y value of this square. b represents moving vertically from the tile, with the same logic applying
+				Altogether, within this code, all the squares touching the tile to the left are checked first, then the middle ones, then the ones to the right
+				Number of touching bombs counted is returned and put into the gameMap array
+			*/
 			for(int a = -1; a<=1; a++){
 				for(int b = -1; b<=1; b++){
 					if((a+ogX<15&&a+ogX>-1)&&(b+ogY<15&&ogY+b>-1)){
@@ -76,6 +93,15 @@ public partial class mainGameCode : Node2D{
 			 
 			 //Console.WriteLine(count);
 			 return count;
+		}
+
+		/*
+		4. Assign Tiles
+			Overview: Assigning data to each tile in the tileMap
+		*/
+
+		public static void assignTiles(){
+			
 		}
 
 		//Tile class, containing all properties of each tile
