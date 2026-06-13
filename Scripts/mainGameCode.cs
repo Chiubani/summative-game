@@ -5,8 +5,21 @@ public partial class mainGameCode : Node2D{
 	public static Random rnd = new Random();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready(){
-			int[,] gameMap = new int[15,15];
-			int[,] bombLocation = new int[2,55]; //tracks where bombs have been placed with x and y coordinates so multiple aren't placed on same square
+			public int[,] gameMap = new int[15,15];
+			int maxBombs = 55;
+			setupMap(gameMap,maxBombs);
+		}
+
+
+		//METHODS
+
+		/*
+		1. Game Setup
+			Overview: bomb locations are decided, nearby numbers are placed. All starting game information is stored
+			
+		*/
+		public static void setupMap(int[,] gameMap){
+			int[,] bombLocation = new int[2,maxBombs]; //tracks where bombs have been placed with x and y coordinates so multiple aren't placed on same square
 			int bombsAmount = 10;
 			int bombR = 0;
 			int bombC = 0;
@@ -37,6 +50,7 @@ public partial class mainGameCode : Node2D{
 				GD.Print();
 			}
 		}
+
 		//Making sure multiple bombs are not placed in the same square by checking if a bomb of same coordinates has been placed in one of the squares
 		public static bool bombThere(int bombR, int bombC, int[,] arr, int b){
 			for(int i = 0; i<b;i++){
@@ -60,6 +74,7 @@ public partial class mainGameCode : Node2D{
 				}
 			 }
 			 
+			 //Console.WriteLine(count);
 			 return count;
 		}
 
