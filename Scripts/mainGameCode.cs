@@ -100,15 +100,14 @@ public partial class mainGameCode : Node2D{
 			Overview: Assigning data to each tile in the tileMap
 		*/
 
-		public static void assignTiles(){
+		public static void assignTiles(Tile[,] map){
 			
 		}
 
 		//Tile class, containing all properties of each tile
 		public class Tile{
 			int type;
-			int x;
-			int y;
+			Vector2I position;
 			boolean flagged;
 			boolean revealed;
 
