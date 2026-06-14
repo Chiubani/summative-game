@@ -80,7 +80,6 @@ public partial class mainGameCode : Node2D{
 				}
 			 }
 			 
-			 //Console.WriteLine(count);
 			 return count;
 		}
 
@@ -138,7 +137,7 @@ public partial class mainGameCode : Node2D{
 		}
 
 	public override void _Ready(){
-		int bombsAmount = 10;
+		int bombsAmount = 30;
 		setupMap(gameMap,bombsAmount);
 		assignTiles(board);
 	}
@@ -147,7 +146,8 @@ public partial class mainGameCode : Node2D{
 	public override void _Process(double delta){
 		if (Input.IsMouseButtonPressed(MouseButton.Left)){
 			Vector2 mousePos = GetViewport().GetMousePosition();
-			Vector2I pos = (Vector2I)(mousePos/50);
+			//mousePos = mousePos/93.75;
+			Vector2I pos = (Vector2I)(mousePos/93.5f);
 			for(int p = 0; p<15; p++){
 				for(int q = 0; q<15; q++){
 					if(pos == board[p,q].position){
