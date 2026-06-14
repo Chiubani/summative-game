@@ -20,12 +20,20 @@ public partial class StoneLayer : TileMapLayer
 	}
 
 	public override void _Input(InputEvent @event){
+		/*
 		if (Input.IsMouseButtonPressed(MouseButton.Left)){
 			Vector2 mousePos = GetViewport().GetMousePosition();
 			Vector2I pos = (Vector2I)(mousePos/93.75f);
 			SetCell(pos, -1, new Vector2I(0,0), 0);
 			SetCell(pos, -1, new Vector2I(1,0), 0);
 			//StoneLayer.EraseCell(0, pos);
+		}*/
+		if(@event is InputEventMouseButton mouseButton){
+			if(!mouseButton.Pressed) return;
+			if(mouseButton.ButtonIndex == MouseButton.Left){
+				Vector2I tilePosition = LocalToMap(GetLocalMousePosition());
+				SetCell()
+			}
 		}
 	}
 }
