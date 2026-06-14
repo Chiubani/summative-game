@@ -32,7 +32,8 @@ public partial class StoneLayer : TileMapLayer
 			if(!mouseButton.Pressed) return;
 			if(mouseButton.ButtonIndex == MouseButton.Left){
 				Vector2I tilePosition = LocalToMap(GetLocalMousePosition());
-				SetCell();
+				//SetCell(0, tilePosition, 0, Vector2I.Zero); //SetCell arguments: tileLayer, tile Vector2I position, atlas ID, atlas coordinates
+				//SetCell(tilePosition, 0, new Vector2I(0,0), 0);
 			}
 		}
 	}

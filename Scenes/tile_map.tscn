@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://1x2tfcsj3w7s" path="res://Assets/tileMap (1).png" id="2_0v1hq"]
 [ext_resource type="Script" uid="uid://bk2gjthttkgb4" path="res://Scenes/TileMap.cs" id="2_rlxc1"]
 [ext_resource type="Script" uid="uid://t65munoeuqy0" path="res://Scripts/Effects.cs" id="3_rlxc1"]
-[ext_resource type="Script" uid="uid://bvneh0u6i4ykc" path="res://Scenes/StoneLayer.cs" id="5_6mpdi"]
+[ext_resource type="Script" uid="uid://bvneh0u6i4ykc" path="res://Scripts/StoneLayer.cs" id="5_6mpdi"]
 [ext_resource type="Script" uid="uid://dl6bwlggmyt7s" path="res://Scenes/Flags.cs" id="6_6mpdi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7yhko"]

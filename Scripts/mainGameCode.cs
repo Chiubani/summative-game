@@ -1,11 +1,17 @@
 using Godot;
 using System;
 
+
 public partial class mainGameCode : Node2D{
 	public Random rnd = new Random();
 	// Called when the node enters the scene tree for the first time.
 	public int[,] gameMap = new int[15,15];
 	public Tile[,] board = new Tile[15,15];
+	public Vector2I flag = new Vector2I(5,0);
+	public Vector2I[] numbers = {new Vector2I(3,1), new Vector2I(6,0), new Vector2I(7,0), new Vector2I(0,1), new Vector2I(1,1), new Vector2I(2,1)};
+	public Vector2I bomb = new Vector2I(4,0);
+
+	//Atlas Coordinates of important tiles on the tileset - tiles
 
 		//METHODS
 
