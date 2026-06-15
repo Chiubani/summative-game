@@ -18,7 +18,7 @@ public partial class Effects : TileMapLayer{
 
 	public override void _Ready(){
 		parent = GetParent<mainGameCode>();
-		createMap(parent.board, parent.numbers, parent.bomb);
+		
 	}
 
 	public override void _Process(double delta)

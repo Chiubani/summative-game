@@ -126,6 +126,8 @@ public partial class mainGameCode : Node2D{
 				x++;
 				y = -7;
 			}
+			Effects effectsLayer = GetNode<Effects>("Effects");
+			effectsLayer.createMap(board, numbers, bomb);
 		}
 
 		/*

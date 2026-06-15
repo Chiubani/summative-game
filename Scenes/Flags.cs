@@ -1,8 +1,8 @@
 using Godot;
 using System;
+using System.Linq;
 
-public partial class Flags : TileMapLayer
-{
+public partial class Flags : TileMapLayer{
 	private mainGameCode parent;
 	
 	public int flagCount = 0;
@@ -38,7 +38,8 @@ public partial class Flags : TileMapLayer
 					}
 
 					flagCount++;
-
+					GD.Print("Flag #" + flagCount + ": " + tilePosition[0] + "," + tilePosition[1]);
+					//NOTE: MAKE SURE MULTIPLE FLAGS CAN'T BE PLACED ON SAME TILE
 
 				}
 				
