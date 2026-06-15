@@ -28,7 +28,7 @@ public partial class Flags : TileMapLayer
 
 				//If the max number of flags haven't been placed, place a flag tile on the existing stone tile
 
-				if(tilePosition.x<8 && tilePosition.y<8 && flagCount<parent.bombsAmount){
+				if(tilePosition[0]<8 && tilePosition[1]<8 && flagCount<parent.bombsAmount){
 					SetCell(tilePosition, 1, (Vector2I)parent.flag, 0); //SetCell arguments: tileLayer, tile Vector2I position, atlas ID, atlas coordinates
 
 					for(int a = 0; a<parent.bombsAmount; a++){

@@ -21,6 +21,22 @@ public partial class StoneLayer : TileMapLayer
 			if(mouseButton.ButtonIndex == MouseButton.Left){
 				Vector2I tilePosition = LocalToMap(GetLocalMousePosition());
 				SetCell(tilePosition, 1, (Vector2I)parent.numbers[0], 0);
+				for(int l = 0; l<15; l++){
+					for(int m = 0; m<15; m++){
+						if(tilePosition == parent.board[l,m].position){
+							if(parent.board[l,m].isBomb){
+								GD.Print("BOOM");
+							} else if(parent.board[l,m].isEmpty){
+								GD.Print("none");
+							} else{
+								GD.Print(parent.board[l,m].type);
+							}
+							break;
+						} else if(parent.board[l,m].position == null){
+							GD.Print("Board is null at x:" + l + " , y:" + m + "" );
+						}
+					}
+				}
 			}
 		}
 	}

@@ -27,6 +27,8 @@ public partial class mainGameCode : Node2D{
 
 	public Vector2I[] flagsPlaced = new Vector2I[20];
 
+	public int bombCounter = 0;
+
 		//METHODS
 
 		/*
@@ -166,14 +168,14 @@ public partial class mainGameCode : Node2D{
 		}*/
 
 	public override void _Ready(){
-		int bombCounter = 0;
+		
 		setupMap(gameMap,bombsAmount);
 		assignTiles(board);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta){
-		if (Input.IsMouseButtonPressed(MouseButton.Left)){
+		/*if (Input.IsMouseButtonPressed(MouseButton.Left)){
 			Vector2 mousePos = GetViewport().GetMousePosition();
 			//mousePos = mousePos/93.75;
 			Vector2I pos = (Vector2I)(mousePos/93.5f);
@@ -181,6 +183,33 @@ public partial class mainGameCode : Node2D{
 				for(int q = 0; q<15; q++){
 					if(pos == board[p,q].position){
 						GD.Print(board[p,q].type);
+					}
+				}
+			}
+		}
+	*/
+	}
+	//Testing Tile property assignment
+	public override void _Input(InputEvent @event){
+		
+		if(@event is InputEventMouseButton mouseButton){
+			if(!mouseButton.Pressed) return;
+			if(mouseButton.ButtonIndex == MouseButton.Right){
+				Vector2I tilePosition = (Vector2I)GetLocalMousePosition();
+				for(int l = 0; l<15; l++){
+					for(int m = 0; m<15; m++){
+						if(tilePosition == board[l,m].position){
+							if(board[l,m].isBomb){
+								GD.Print("BOOM");
+							} else if(board[l,m].isEmpty){
+								GD.Print("none");
+							} else{
+								GD.Print(board[l,m].type);
+							}
+							break;
+						} else if(board[l,m].position == null){
+							GD.Print("Board is null at x:" + l + " , y:" + m + "" );
+						}
 					}
 				}
 			}
