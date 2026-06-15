@@ -14,8 +14,8 @@ public partial class Flags : TileMapLayer{
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
+	public override void _Process(double delta){
+
 	}
 
 	//Dropping Flags
@@ -29,19 +29,27 @@ public partial class Flags : TileMapLayer{
 				//If the max number of flags haven't been placed, place a flag tile on the existing stone tile
 
 				if(tilePosition[0]<8 && tilePosition[1]<8 && flagCount<parent.bombsAmount){
-					SetCell(tilePosition, 1, (Vector2I)parent.flag, 0); //SetCell arguments: tileLayer, tile Vector2I position, atlas ID, atlas coordinates
+					if(!parent.flagsPlaced.Contains(tilePosition)){
+						SetCell(tilePosition, 1, (Vector2I)parent.flag, 0); //SetCell arguments: tileLayer, tile Vector2I position, atlas ID, atlas coordinates
 
-					for(int a = 0; a<parent.bombsAmount; a++){
-						if(tilePosition == parent.bombLocations[a]){
+						if(parent.bombLocations.Contains(tilePosition)){
 							parent.score++;
 						}
-					}
 
-					flagCount++;
-					GD.Print("Flag #" + flagCount + ": " + tilePosition[0] + "," + tilePosition[1]);
+						flagCount++;
+						GD.Print("Flag #" + flagCount + ": " + tilePosition[0] + "," + tilePosition[1]);
+					} else{
+						SetCell(tilePosition, 1, parent.numbers[0], 0);
+						int o = Array.IndexOf(flagsPlaced, tilePosition);
+						for(o<flagCount; o++){
+							parent.flagsPlaced[o] = parent.flagsPlaced[o+1];
+						}
+						flagCount--;
+					}
+					
 					//NOTE: MAKE SURE MULTIPLE FLAGS CAN'T BE PLACED ON SAME TILE
 
-				}
+				} 
 				
 			}
 		}
