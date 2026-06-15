@@ -40,11 +40,13 @@ public partial class Flags : TileMapLayer{
 						GD.Print("Flag #" + flagCount + ": " + tilePosition[0] + "," + tilePosition[1]);
 					} else{
 						SetCell(tilePosition, 1, parent.numbers[0], 0);
-						int o = Array.IndexOf(flagsPlaced, tilePosition);
-						for(o<flagCount; o++){
+						GD.Print("Flag #" + Array.IndexOf(parent.flagsPlaced, tilePosition) + ": " + tilePosition[0] + "," + tilePosition[1] + " REMOVED");
+
+						for(int o = Array.IndexOf(parent.flagsPlaced, tilePosition); o<flagCount; o++){
 							parent.flagsPlaced[o] = parent.flagsPlaced[o+1];
 						}
 						flagCount--;
+						
 					}
 					
 					//NOTE: MAKE SURE MULTIPLE FLAGS CAN'T BE PLACED ON SAME TILE
