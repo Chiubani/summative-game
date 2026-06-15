@@ -1,13 +1,34 @@
 using Godot;
 using System;
 
-public partial class TileMap : Godot.TileMap{
-	public static Random rnd = new Random();
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready(){
-			int[,] gameMap = new int[15,15];
-			int[,] bombLocation = new int[2,55]; //tracks where bombs have been placed with x and y coordinates so multiple aren't placed on same square
-			int bombsAmount = 10;
+
+public partial class TileMap : Node2D{
+	public Random rnd = new Random();
+
+	//Game board arrays => Visible Tiles and numbers(with bombs)
+	
+	public int[,] gameMap = new int[15,15];
+	
+	public Tile[,] board = new Tile[15,15];
+
+	//Atlas Coordinates of important tiles on the tileset - tiles
+	[Export]
+	public Vector2 flag = new Vector2(5f,0f);
+	
+	public Vector2I[] numbers = {new Vector2I(3,1), new Vector2I(6,0), new Vector2I(7,0), new Vector2I(0,1), new Vector2I(1,1), new Vector2I(2,1)};
+	
+	public Vector2I bomb = new Vector2I(4,0);
+
+		//METHODS
+
+		/*
+		1. Game Setup
+			Overview: bomb locations are decided, nearby numbers are placed. All starting game information is stored
+
+		*/
+		public void setupMap(int[,] gameMap, int bombsAmount){
+			int[,] bombLocation = new int[2,bombsAmount]; //tracks where bombs have been placed with x and y coordinates so multiple aren't placed on same square
+			//int bombsAmount = 10;
 			int bombR = 0;
 			int bombC = 0;
 			
@@ -30,15 +51,15 @@ public partial class TileMap : Godot.TileMap{
 				}
 			}
 			
-			for(int r = 0; r<15; r++){
-				for (int c = 0; c<15; c++){
-					GD.Print(gameMap[r,c]);
-				}
-				GD.Print();
-			}
+			
 		}
-		//Making sure multiple bombs are not placed in the same square by checking if a bomb of same coordinates has been placed in one of the squares
-		public static bool bombThere(int bombR, int bombC, int[,] arr, int b){
+
+		/*
+		2. Bomb There
+			Overview: Ensuring multiple bombs are not placed in the same square by checking if a bomb of same coordinates has already been placed in one of the squares
+		*/
+
+		public bool bombThere(int bombR, int bombC, int[,] arr, int b){
 			for(int i = 0; i<b;i++){
 				if(arr[0,i]==bombR && arr[1,i]==bombC){
 					return true;
@@ -46,10 +67,21 @@ public partial class TileMap : Godot.TileMap{
 			}
 			return false;
 		}
+
+		/*
+		3. Get Square Number
+			Overview: Counting number of bombs around the square to put into the gameMap array. This will eventually be the number on this square in the actual game, if any
+		*/
 		
-		public static int getSquareNo(int ogX, int ogY, int[,] map){
+		public int getSquareNo(int ogX, int ogY, int[,] map){
 			int count = 0;
 			
+			/* Explanation:
+				ogX is the x value of this square. a represents moving away from the current tile horizontally. ogX - 1 would check one of the squares to the left of x, and ogX+1 would chec one of the squares to the right
+				ogY is the y value of this square. b represents moving vertically from the tile, with the same logic applying
+				Altogether, within this code, all the squares touching the tile to the left are checked first, then the middle ones, then the ones to the right
+				Number of touching bombs counted is returned and put into the gameMap array
+			*/
 			for(int a = -1; a<=1; a++){
 				for(int b = -1; b<=1; b++){
 					if((a+ogX<15&&a+ogX>-1)&&(b+ogY<15&&ogY+b>-1)){
@@ -60,12 +92,81 @@ public partial class TileMap : Godot.TileMap{
 				}
 			 }
 			 
-			 //Console.WriteLine(count);
 			 return count;
 		}
 
+		/*
+		4. Assign Tiles
+			Overview: Assigning data to each tile in the tileMap
+		*/
+
+		public void assignTiles(Tile[,] gameBoard){
+			int x = -7;
+			int y = -7;
+			int tileType = 0;
+			for(int i = 0; i<15; i++){
+				for(int j = 0; j<15; j++){
+					gameBoard[i,j] = new Tile(x,y,gameMap[i,j]);
+					y++;
+				}
+				x++;
+				y = -7;
+			}
+		}
+
+		/*
+
+
+		*/
+
+		//Tile class, containing all properties of each tile
+		public class Tile{
+			public int type;
+			public Vector2I position = new Vector2I(0,0);
+			public bool flagged;
+			public bool revealed;
+			public bool isMine;
+
+			public Tile(){
+				this.type = 0;
+				this.position = new Vector2I(0,0);
+				this.flagged = false;
+				this.revealed = false;
+				this.isMine = false;
+			}
+
+			public Tile(int inputX, int inputY, int inputType){
+				this.position = new Vector2I(inputX,inputY);
+				this.type = inputType;
+				this.flagged = false;
+				this.revealed = false;
+				if(inputType == -2){
+					this.isMine = true;
+				} else{
+					this.isMine = false;
+				}
+			}
+		}
+
+	public override void _Ready(){
+		int bombsAmount = 30;
+		setupMap(gameMap,bombsAmount);
+		assignTiles(board);
+	}
+
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta){
-	
+		if (Input.IsMouseButtonPressed(MouseButton.Left)){
+			Vector2 mousePos = GetViewport().GetMousePosition();
+			//mousePos = mousePos/93.75;
+			Vector2I pos = (Vector2I)(mousePos/93.5f);
+			for(int p = 0; p<15; p++){
+				for(int q = 0; q<15; q++){
+					if(pos == board[p,q].position){
+						GD.Print(board[p,q].type);
+					}
+				}
+			}
+		}
 	}
 }
