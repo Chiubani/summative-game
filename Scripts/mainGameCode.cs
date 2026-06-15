@@ -15,7 +15,7 @@ public partial class mainGameCode : Node2D{
 	//[Export]
 	public Vector2 flag = new Vector2(5f,0f);
 	
-	public Vector2I[] numbers = {new Vector2I(3,1), new Vector2I(6,0), new Vector2I(7,0), new Vector2I(0,1), new Vector2I(1,1), new Vector2I(2,1)};
+	public Vector2I[] numbers = {new Vector2I(7,0), new Vector2I(0,1), new Vector2I(1,1), new Vector2I(2,1), new Vector2I(3,1), new Vector2I(4,1), new Vector2I(5,1), new Vector2I(6,1)};
 	
 	public Vector2I bomb = new Vector2I(4,0);
 
@@ -28,6 +28,8 @@ public partial class mainGameCode : Node2D{
 	public Vector2I[] flagsPlaced = new Vector2I[20];
 
 	public int bombCounter = 0;
+
+	public bool gameOver = false;
 
 		//METHODS
 

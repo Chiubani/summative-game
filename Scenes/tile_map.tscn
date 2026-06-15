@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bngmlw7aevqy2" path="res://Scripts/mainGameCode.cs" id="1_drmie"]
 [ext_resource type="Texture2D" uid="uid://1x2tfcsj3w7s" path="res://Assets/tileMap (1).png" id="2_0v1hq"]
+[ext_resource type="Texture2D" uid="uid://d3eu1jei7h3gw" path="res://Assets/Tileset (1).png" id="3_6mpdi"]
 [ext_resource type="Script" uid="uid://t65munoeuqy0" path="res://Scripts/Effects.cs" id="3_rlxc1"]
 [ext_resource type="Script" uid="uid://bvneh0u6i4ykc" path="res://Scripts/StoneLayer.cs" id="5_6mpdi"]
 [ext_resource type="Script" uid="uid://dl6bwlggmyt7s" path="res://Scenes/Flags.cs" id="6_6mpdi"]
@@ -42,12 +43,33 @@ texture_region_size = Vector2i(25, 25)
 0:1/0 = 0
 0:1/0/custom_data_0 = 3
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xsk5a"]
+texture = ExtResource("3_6mpdi")
+texture_region_size = Vector2i(25, 25)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+7:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_1n30v"]
 tile_size = Vector2i(25, 25)
 custom_data_layer_0/name = "type"
 custom_data_layer_0/type = 2
 sources/0 = SubResource("TileSetAtlasSource_7yhko")
 sources/1 = SubResource("TileSetAtlasSource_1n30v")
+sources/6 = SubResource("TileSetAtlasSource_xsk5a")
 
 [node name="mainGame" type="Node2D" unique_id=1617479273]
 script = ExtResource("1_drmie")

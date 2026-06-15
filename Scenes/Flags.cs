@@ -20,42 +20,72 @@ public partial class Flags : TileMapLayer{
 
 	//Dropping Flags
 	public override void _Input(InputEvent @event){
+		bool flagHere = false;
 		//Placing flags on rightclicks
 		if(@event is InputEventMouseButton mouseButton){
 			if(!mouseButton.Pressed) return;
 			if(mouseButton.ButtonIndex == MouseButton.Right){
 				Vector2I tilePosition = LocalToMap(GetLocalMousePosition());
+				
+				//If the tile has not been revealed already:
+
+				if(!tileRevealed(tilePosition, parent.board)){
+					if(tilePosition[0]<8 && tilePosition[1]<8 && flagCount<parent.bombsAmount){
+						
+						if (Array.IndexOf(parent.flagsPlaced, tilePosition) == -1){
+							SetCell(tilePosition, 1, (Vector2I)parent.flag, 0);
+							if(parent.bombLocations.Contains(tilePosition)){
+								parent.score++;
+							}
+
+							parent.flagsPlaced[flagCount] = tilePosition;
+
+							flagCount++;
+							GD.Print("Flag #" + flagCount + ": " + tilePosition[0] + "," + tilePosition[1]);
+						} else{
+							SetCell(tilePosition, 6, parent.numbers[0], 1);
+							GD.Print("Flag #" + Array.IndexOf(parent.flagsPlaced, tilePosition) + ": " + tilePosition[0] + "," + tilePosition[1] + " REMOVED");
+							
+							
+							if (flagCount != parent.bombsAmount){
+								for(int o = Array.IndexOf(parent.flagsPlaced, tilePosition); o<flagCount-1; o++){
+									parent.flagsPlaced[o] = parent.flagsPlaced[o+1];
+								}
+
+
+								parent.flagsPlaced[flagCount - 1] = new Vector2I(0, 0);
+								flagCount--;
+							}
+						}
+						
+						//NOTE: MAKE SURE MULTIPLE FLAGS CAN'T BE PLACED ON SAME TILE
+						
+					} 
+				}
 
 				//If the max number of flags haven't been placed, place a flag tile on the existing stone tile
-
-				if(tilePosition[0]<8 && tilePosition[1]<8 && flagCount<parent.bombsAmount){
-					if(!parent.flagsPlaced.Contains(tilePosition)){
-						SetCell(tilePosition, 1, (Vector2I)parent.flag, 0); //SetCell arguments: tileLayer, tile Vector2I position, atlas ID, atlas coordinates
-
-						if(parent.bombLocations.Contains(tilePosition)){
-							parent.score++;
-						}
-
-						flagCount++;
-						GD.Print("Flag #" + flagCount + ": " + tilePosition[0] + "," + tilePosition[1]);
-					} else{
-						SetCell(tilePosition, 1, parent.numbers[0], 0);
-						GD.Print("Flag #" + Array.IndexOf(parent.flagsPlaced, tilePosition) + ": " + tilePosition[0] + "," + tilePosition[1] + " REMOVED");
-
-						for(int o = Array.IndexOf(parent.flagsPlaced, tilePosition); o<flagCount; o++){
-							parent.flagsPlaced[o] = parent.flagsPlaced[o+1];
-						}
-						flagCount--;
-						
-					}
-					
-					//NOTE: MAKE SURE MULTIPLE FLAGS CAN'T BE PLACED ON SAME TILE
-
-				} 
 				
 			}
 		}
 	}
+
+	//Method to check if tile has been revealed already
+	public bool tileRevealed(Vector2I pos, Tile[,] map){
+		for(int r = 0; r<15; r++){
+			for(int c = 0; c<15; c++){
+				if(map[r,c].position == pos){
+					if(map[r,c].revealed){
+						return true;
+					} else{
+						return false;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+}
 
 /*
 To do for flags:
@@ -63,7 +93,3 @@ To do for flags:
 - Let placed flags be stored for a score thing (have a bomb positions public Vector2I variable)
 - Make flags removable by right click ONLY IF a flag is already placed there
 */
-
-
-}
-

@@ -4,12 +4,19 @@ using System;
 public partial class Effects : TileMapLayer{
 	private mainGameCode parent;
 	
-	
+
+	//Assigning tiles for the effects map
 	public void createMap(Tile[,] gameBoard, Vector2I[] atlasPos, Vector2I boomPos){
 		for(int r = 0; r<15; r++){
 			for(int c = 0; c<15; c++){
-				//SetCell(tilePosition, 1, (Vector2I)parent.numbers[0], 0);
-				SetCell(gameBoard[r,c].position,1,parent.numbers[gameBoard[r,c].type],0);
+
+				Tile currentTile = gameBoard[r,c];
+
+				if(!gameBoard[r,c].isBomb){
+					SetCell(currentTile.position,6,parent.numbers[currentTile.type],0);
+				} else{
+					SetCell(currentTile.position,6,boomPos,0);
+				}
 			}
 		}
 	}
