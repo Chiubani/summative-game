@@ -21,6 +21,12 @@ public partial class mainGameCode : Node2D{
 
 	public int bombsAmount = 20;
 
+	public int score = 0;
+
+	public Vector2I[] bombLocations = new Vector2I[20];
+
+	public Vector2I[] flagsPlaced = new Vector2I[20];
+
 		//METHODS
 
 		/*
@@ -109,6 +115,10 @@ public partial class mainGameCode : Node2D{
 			for(int i = 0; i<15; i++){
 				for(int j = 0; j<15; j++){
 					gameBoard[i,j] = new Tile(x,y,gameMap[i,j]);
+					if(gameMap[i,j]==-2){
+						bombLocations[bombCounter] = new Vector2I(x,y);
+						bombCounter++;
+					}
 					y++;
 				}
 				x++;
@@ -122,7 +132,7 @@ public partial class mainGameCode : Node2D{
 		*/
 
 		//Tile class, containing all properties of each tile
-		public class Tile{
+		/*public class Tile{
 			public int type;
 			public Vector2I position = new Vector2I(0,0);
 			public bool flagged;
@@ -153,9 +163,10 @@ public partial class mainGameCode : Node2D{
 					}
 				}
 			}
-		}
+		}*/
 
 	public override void _Ready(){
+		int bombCounter = 0;
 		setupMap(gameMap,bombsAmount);
 		assignTiles(board);
 	}
