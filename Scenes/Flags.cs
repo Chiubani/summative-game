@@ -85,6 +85,17 @@ public partial class Flags : TileMapLayer{
 		return false;
 	}
 
+	public void flagTile(Vector2I pos, Tile[,] map){
+		for(int r = 0; r<15; r++){
+			for(int c = 0; c<15; c++){
+				if(map[r,c].position == pos){
+					map[r,c].flagged = true;
+					break;
+				}
+			}
+		}
+	}
+
 }
 
 /*
