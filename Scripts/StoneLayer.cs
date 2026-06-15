@@ -4,7 +4,7 @@ using System;
 public partial class StoneLayer : TileMapLayer
 {
 	private mainGameCode parent;
-	// Called when the node enters the scene tree for the first time.
+
 	public override void _Ready(){
 		parent = GetParent<mainGameCode>();
 	}
@@ -15,12 +15,12 @@ public partial class StoneLayer : TileMapLayer
 	}
 
 	public override void _Input(InputEvent @event){
+		//Revealing Tiles on left click
 		if(@event is InputEventMouseButton mouseButton){
 			if(!mouseButton.Pressed) return;
 			if(mouseButton.ButtonIndex == MouseButton.Left){
 				Vector2I tilePosition = LocalToMap(GetLocalMousePosition());
-				//SetCell(0, tilePosition, 0, Vector2I.Zero); //SetCell arguments: tileLayer, tile Vector2I position, atlas ID, atlas coordinates
-				//SetCell(tilePosition, 0, new Vector2I(0,0), 0);
+				SetCell(tilePosition, 1, (Vector2I)parent.numbers[0], 0);
 			}
 		}
 	}

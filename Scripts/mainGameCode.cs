@@ -19,6 +19,8 @@ public partial class mainGameCode : Node2D{
 	
 	public Vector2I bomb = new Vector2I(4,0);
 
+	public int bombsAmount = 20;
+
 		//METHODS
 
 		/*
@@ -126,13 +128,15 @@ public partial class mainGameCode : Node2D{
 			public bool flagged;
 			public bool revealed;
 			public bool isMine;
+			public bool isEmpty;
 
 			public Tile(){
 				this.type = 0;
 				this.position = new Vector2I(0,0);
 				this.flagged = false;
 				this.revealed = false;
-				this.isMine = false;
+				this.isBomb = false;
+				this.isEmpty = true;
 			}
 
 			public Tile(int inputX, int inputY, int inputType){
@@ -141,15 +145,17 @@ public partial class mainGameCode : Node2D{
 				this.flagged = false;
 				this.revealed = false;
 				if(inputType == -2){
-					this.isMine = true;
+					this.isBomb = true;
 				} else{
-					this.isMine = false;
+					this.isBomb = false;
+					if(inputType == 0){
+						this.isEmpty = true;
+					}
 				}
 			}
 		}
 
 	public override void _Ready(){
-		int bombsAmount = 30;
 		setupMap(gameMap,bombsAmount);
 		assignTiles(board);
 	}

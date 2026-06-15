@@ -16,6 +16,7 @@ public partial class Flags : TileMapLayer
 	{
 	}
 
+	//Dropping Flags
 	public override void _Input(InputEvent @event){
 		//Placing flags on rightclicks
 		if(@event is InputEventMouseButton mouseButton){
