@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bvn8bpjbq5ctl"]
+
+[ext_resource type="Texture2D" uid="uid://b5i0jca50wxrp" path="res://Assets/MINESWEEPER.png" id="1_nt0jr"]
+[ext_resource type="Script" uid="uid://bikcwqno3hww4" path="res://Scripts/button.gd" id="2_nt0jr"]
+
+[node name="Start" type="Node2D" unique_id=288646290]
+
+[node name="BG" type="Sprite2D" parent="." unique_id=14020274]
+position = Vector2(375, 375)
+texture = ExtResource("1_nt0jr")
+
+[node name="Button" type="Button" parent="." unique_id=1802249913]
+offset_left = 116.0
+offset_top = 576.0
+offset_right = 597.0
+offset_bottom = 698.0
+text = "START"
+script = ExtResource("2_nt0jr")
+
+[connection signal="button_up" from="Button" to="Button" method="_on_button_up"]

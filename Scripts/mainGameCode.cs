@@ -179,44 +179,10 @@ public partial class mainGameCode : Node2D{
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta){
-		/*if (Input.IsMouseButtonPressed(MouseButton.Left)){
-			Vector2 mousePos = GetViewport().GetMousePosition();
-			//mousePos = mousePos/93.75;
-			Vector2I pos = (Vector2I)(mousePos/93.5f);
-			for(int p = 0; p<15; p++){
-				for(int q = 0; q<15; q++){
-					if(pos == board[p,q].position){
-						GD.Print(board[p,q].type);
-					}
-				}
-			}
-		}
-	*/
-	}
-	//Testing Tile property assignment
-	public override void _Input(InputEvent @event){
-		
-		if(@event is InputEventMouseButton mouseButton){
-			if(!mouseButton.Pressed) return;
-			if(mouseButton.ButtonIndex == MouseButton.Right){
-				Vector2I tilePosition = (Vector2I)GetLocalMousePosition();
-				for(int l = 0; l<15; l++){
-					for(int m = 0; m<15; m++){
-						if(tilePosition == board[l,m].position){
-							if(board[l,m].isBomb){
-								GD.Print("BOOM");
-							} else if(board[l,m].isEmpty){
-								GD.Print("none");
-							} else{
-								GD.Print(board[l,m].type);
-							}
-							break;
-						} else if(board[l,m].position == null){
-							GD.Print("Board is null at x:" + l + " , y:" + m + "" );
-						}
-					}
-				}
-			}
+		if(gameOver){
+			/*
+			_popUpPanel = GetNode<Panel>("EndGameCanvas/PopUpPanel");
+        	_messageLabel = GetNode<Label>("EndGameCanvas/PopUpPanel/MessageLabel");*/
 		}
 	}
 }

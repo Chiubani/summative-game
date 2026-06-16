@@ -57,6 +57,8 @@ public partial class StoneLayer : TileMapLayer
 					if((a + clickedX < 15 && a + clickedX > -1)&&(b+clickedY < 15 && clickedY+b >-1)){
 						if(map[(clickedX+a),(clickedY+b)].type==0 && !map[(clickedX+a),(clickedY+b)].revealed){
 							revealTiles(map[(clickedX+a),(clickedY+b)].position, map);
+						} else{
+							SetCell(map[(clickedX+a),(clickedY+b)].position, 6, (Vector2I)parent.numbers[0], 0);
 						}
 					}
 				}
@@ -77,5 +79,6 @@ public partial class StoneLayer : TileMapLayer
 			SetCell(bombsL[x], 6, (Vector2I)parent.numbers[0], 1);
 		}
 		parent.gameOver = true;
+		//GetTree().ChangeSceneToFile("res://Scenes/tile_map.tscn");
 	}
 }

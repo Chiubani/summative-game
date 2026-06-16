@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dwgjp2qcma47p"]
+
+[ext_resource type="Texture2D" uid="uid://b5i0jca50wxrp" path="res://Assets/MINESWEEPER.png" id="1_n735c"]
+
+[node name="End" type="Node2D" unique_id=151043194]
+
+[node name="Minesweeper" type="Sprite2D" parent="." unique_id=183687232]
+position = Vector2(376, 376)
+texture = ExtResource("1_n735c")
