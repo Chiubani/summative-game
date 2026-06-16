@@ -42,6 +42,7 @@ public partial class Flags : TileMapLayer{
 
 							flagCount++;
 							GD.Print("Flag #" + flagCount + ": " + tilePosition[0] + "," + tilePosition[1]);
+							flagTile(tilePosition, parent.board);
 						} else{
 							SetCell(tilePosition, 6, parent.numbers[0], 1);
 							GD.Print("Flag #" + Array.IndexOf(parent.flagsPlaced, tilePosition) + ": " + tilePosition[0] + "," + tilePosition[1] + " REMOVED");
@@ -56,11 +57,26 @@ public partial class Flags : TileMapLayer{
 								parent.flagsPlaced[flagCount - 1] = new Vector2I(0, 0);
 								flagCount--;
 							}
+							flagTile(tilePosition, parent.board);
 						}
 						
 						//NOTE: MAKE SURE MULTIPLE FLAGS CAN'T BE PLACED ON SAME TILE
 						
-					} 
+					} else if(Array.IndexOf(parent.flagsPlaced, tilePosition) != -1){
+						SetCell(tilePosition, 6, parent.numbers[0], 1);
+						GD.Print("Flag #" + Array.IndexOf(parent.flagsPlaced, tilePosition) + ": " + tilePosition[0] + "," + tilePosition[1] + " REMOVED");
+							
+						
+						if (flagCount != parent.bombsAmount){
+							for(int o = Array.IndexOf(parent.flagsPlaced, tilePosition); o<flagCount-1; o++){
+								parent.flagsPlaced[o] = parent.flagsPlaced[o+1];
+							}
+
+							parent.flagsPlaced[flagCount - 1] = new Vector2I(0, 0);
+							flagCount--;
+						}
+							flagTile(tilePosition, parent.board);
+					}
 				}
 
 				//If the max number of flags haven't been placed, place a flag tile on the existing stone tile
@@ -71,27 +87,21 @@ public partial class Flags : TileMapLayer{
 
 	//Method to check if tile has been revealed already
 	public bool tileRevealed(Vector2I pos, Tile[,] map){
-		for(int r = 0; r<15; r++){
-			for(int c = 0; c<15; c++){
-				if(map[r,c].position == pos){
-					if(map[r,c].revealed){
-						return true;
-					} else{
-						return false;
-					}
-				}
-			}
+		Tile clicked = map[(pos[0]+7),(pos[1]+7)];
+		if(clicked.revealed){
+			return true;
+		} else{
+			return false;
 		}
-		return false;
 	}
 
 	public void flagTile(Vector2I pos, Tile[,] map){
-		for(int r = 0; r<15; r++){
-			for(int c = 0; c<15; c++){
-				if(map[r,c].position == pos){
-					map[r,c].flagged = true;
-					break;
-				}
+		Tile clicked = map[(pos[0]+7),(pos[1]+7)];
+		if(clicked.position == pos){
+			if(!clicked.flagged){
+				clicked.flagged = true;
+			} else{
+				clicked.flagged = false;
 			}
 		}
 	}

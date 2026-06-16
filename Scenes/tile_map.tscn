@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d3eu1jei7h3gw" path="res://Assets/Tileset (1).png" id="3_6mpdi"]
 [ext_resource type="Script" uid="uid://t65munoeuqy0" path="res://Scripts/Effects.cs" id="3_rlxc1"]
 [ext_resource type="Script" uid="uid://bvneh0u6i4ykc" path="res://Scripts/StoneLayer.cs" id="5_6mpdi"]
-[ext_resource type="Script" uid="uid://dl6bwlggmyt7s" path="res://Scenes/Flags.cs" id="6_6mpdi"]
+[ext_resource type="Script" uid="uid://dl6bwlggmyt7s" path="res://Scripts/Flags.cs" id="6_6mpdi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7yhko"]
 resource_name = "tiles"
@@ -103,6 +103,14 @@ tile_set = SubResource("TileSet_1n30v")
 collision_enabled = false
 script = ExtResource("6_6mpdi")
 
-[node name="gameTileMap" type="TileMap" parent="." unique_id=776511916]
+[node name="End" type="Window" parent="." unique_id=401142231]
+oversampling_override = 1.0
+position = Vector2i(150, 100)
+size = Vector2i(400, 500)
 visible = false
-format = 2
+
+[node name="Start" type="Window" parent="." unique_id=871933687]
+oversampling_override = 1.0
+position = Vector2i(150, 100)
+size = Vector2i(400, 500)
+visible = false

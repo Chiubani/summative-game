@@ -20,7 +20,7 @@ public partial class StoneLayer : TileMapLayer
 			if(!mouseButton.Pressed) return;
 			if(mouseButton.ButtonIndex == MouseButton.Left){
 				Vector2I tilePosition = LocalToMap(GetLocalMousePosition());
-				if(!tileFlagged(tilePosition, parent.board)){
+				if(!tileFlagged(tilePosition, parent.board) && !parent.gameOver){
 					SetCell(tilePosition, 6, (Vector2I)parent.numbers[0], 0);
 					//Storing data of revealed tiles for flags
 					for(int l = 0; l<15; l++){
@@ -31,24 +31,35 @@ public partial class StoneLayer : TileMapLayer
 						}
 					}
 				}
+				checkLoss(tilePosition, parent.board);
 			}
 		}
 	}
 
+	//Check if tile has already been flagged by sorting through the array with a loop
 	public bool tileFlagged(Vector2I pos, Tile[,] map){
-		for(int r = 0; r<15; r++){
-			for(int c = 0; c<15; c++){
-				if(map[r,c].position == pos){
-					if(map[r,c].flagged==true){
-						GD.Print("Flagged");
-						return true;
-					} else{
-						GD.Print("Not Flagged");
-						return false;
-					}
-				}
-			}
+		Tile clicked = map[(pos[0]+7),(pos[1]+7)];
+		if(clicked.flagged){
+			return true;
+		} else{
+			return false;
 		}
-		return false;
+
+		return true;
+	}
+
+	//Check if a bomb tile has been clicked
+	public void checkLoss(Vector2I pos, Tile[,] map){
+		Tile clicked = map[(pos[0]+7),(pos[1]+7)];
+		if(clicked.isBomb){
+			triggerEndGame(parent.bombLocations);
+		}
+	}
+
+	public void triggerEndGame(Vector2I[] bombsL){
+		for(int x = 0; x<parent.bombsAmount; x++){
+			SetCell(bombsL[x], 6, (Vector2I)parent.numbers[0], 1);
+		}
+		parent.gameOver = true;
 	}
 }
