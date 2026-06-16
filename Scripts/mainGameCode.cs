@@ -11,25 +11,30 @@ public partial class mainGameCode : Node2D{
 	
 	public Tile[,] board = new Tile[15,15];
 
-	//Atlas Coordinates of important tiles on the tileset - tiles
-	//[Export]
+	//Atlas Coordinates of important tiles on the tileset - Vector2I
 	public Vector2 flag = new Vector2(5f,0f);
 	
 	public Vector2I[] numbers = {new Vector2I(7,0), new Vector2I(0,1), new Vector2I(1,1), new Vector2I(2,1), new Vector2I(3,1), new Vector2I(4,1), new Vector2I(5,1), new Vector2I(6,1)};
 	
 	public Vector2I bomb = new Vector2I(4,0);
 
+	//Number of bombs on the board, and player's score
 	public int bombsAmount = 20;
 
 	public int score = 0;
 
+	//Stores where bombs and flags are placed on the grid
 	public Vector2I[] bombLocations = new Vector2I[20];
 
 	public Vector2I[] flagsPlaced = new Vector2I[20];
 
+	//Used for indexing when assigning bombs into bombLocations array
 	public int bombCounter = 0;
 
+	//Set off when player looses or wins
 	public bool gameOver = false;
+
+	public bool gameWin = false;
 
 		//METHODS
 
@@ -132,57 +137,23 @@ public partial class mainGameCode : Node2D{
 			effectsLayer.createMap(board, numbers, bomb);
 		}
 
-		/*
-
-
-		*/
-
-		//Tile class, containing all properties of each tile
-		/*public class Tile{
-			public int type;
-			public Vector2I position = new Vector2I(0,0);
-			public bool flagged;
-			public bool revealed;
-			public bool isMine;
-			public bool isEmpty;
-
-			public Tile(){
-				this.type = 0;
-				this.position = new Vector2I(0,0);
-				this.flagged = false;
-				this.revealed = false;
-				this.isBomb = false;
-				this.isEmpty = true;
-			}
-
-			public Tile(int inputX, int inputY, int inputType){
-				this.position = new Vector2I(inputX,inputY);
-				this.type = inputType;
-				this.flagged = false;
-				this.revealed = false;
-				if(inputType == -2){
-					this.isBomb = true;
-				} else{
-					this.isBomb = false;
-					if(inputType == 0){
-						this.isEmpty = true;
-					}
-				}
-			}
-		}*/
-
 	public override void _Ready(){
-		
+		//Set up game map
 		setupMap(gameMap,bombsAmount);
+		//Assign tiles
 		assignTiles(board);
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta){
-		if(gameOver){
-			/*
-			_popUpPanel = GetNode<Panel>("EndGameCanvas/PopUpPanel");
-        	_messageLabel = GetNode<Label>("EndGameCanvas/PopUpPanel/MessageLabel");*/
+	public void triggerEnd(int score, bool won){
+		//Panels for end message
+		Window popUpPanel = GetNode<Window>("End");
+		Label messageLabel = GetNode<Label>("End/Label");
+		//Display end window
+		popUpPanel.Visible = true;
+		if(won){
+			messageLabel.Text = "YOU WIN! \n You flagged all 20 bombs! \n GREAT JOB!";
+		} else{
+			messageLabel.Text = "BOOM!! \n You hit a bomb! \n You Lose \n Your SCORE: " + score;
 		}
 	}
 }

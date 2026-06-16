@@ -9,11 +9,6 @@ public partial class StoneLayer : TileMapLayer
 		parent = GetParent<mainGameCode>();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta){
-		
-	}
-
 	public override void _Input(InputEvent @event){
 		//Revealing Tiles on left click
 		if(@event is InputEventMouseButton mouseButton){
@@ -30,6 +25,8 @@ public partial class StoneLayer : TileMapLayer
 
 	//Check if tile has already been flagged by sorting through the array with a loop
 	public bool tileFlagged(Vector2I pos, Tile[,] map){
+
+		// 7 is added to position because Vector2I grid goes from -7 to 7, but arrays can only start from 0
 		Tile clicked = map[(pos[0]+7),(pos[1]+7)];
 		if(clicked.flagged){
 			return true;
@@ -79,6 +76,6 @@ public partial class StoneLayer : TileMapLayer
 			SetCell(bombsL[x], 6, (Vector2I)parent.numbers[0], 1);
 		}
 		parent.gameOver = true;
-		//GetTree().ChangeSceneToFile("res://Scenes/tile_map.tscn");
+		parent.triggerEnd(parent.score, false);
 	}
 }

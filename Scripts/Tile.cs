@@ -1,9 +1,13 @@
 using Godot;
 using System;
 
+//Tile class, made up of different instance variables that store each tile's properties on the game map
+
 public partial class Tile : Resource{
-    //public class Tile{
+            //Numerical type assigned to each square in the gameMap[,] array in mainGameCode, where 0 means an empty square, -2 means a bomb, and numerical values from 1 to 8 show number of surrounding bombs
 			public int type;
+            
+            //
 			public Vector2I position = new Vector2I(0,0);
 			public bool flagged;
 			public bool revealed;
@@ -33,5 +37,4 @@ public partial class Tile : Resource{
 					}
 				}
 			}
-		//}
 }

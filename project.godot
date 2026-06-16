@@ -20,6 +20,8 @@ config/icon="res://Other/icon.svg"
 window/size/viewport_width=750
 window/size/viewport_height=750
 window/subwindows/embed_subwindows=false
+mouse_cursor/custom_image="uid://bgv66psc17ufm"
+mouse_cursor/custom_image_hotspot=Vector2(15, 15)
 
 [dotnet]
 
