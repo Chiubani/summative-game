@@ -21,15 +21,7 @@ public partial class StoneLayer : TileMapLayer
 			if(mouseButton.ButtonIndex == MouseButton.Left){
 				Vector2I tilePosition = LocalToMap(GetLocalMousePosition());
 				if(!tileFlagged(tilePosition, parent.board) && !parent.gameOver){
-					SetCell(tilePosition, 6, (Vector2I)parent.numbers[0], 0);
-					//Storing data of revealed tiles for flags
-					for(int l = 0; l<15; l++){
-						for(int m = 0; m<15; m++){
-							if(tilePosition == parent.board[l,m].position){
-								parent.board[l,m].revealed = true;
-							}
-						}
-					}
+					revealTiles(tilePosition, parent.board);
 				}
 				checkLoss(tilePosition, parent.board);
 			}
@@ -46,6 +38,30 @@ public partial class StoneLayer : TileMapLayer
 		}
 
 		return true;
+	}
+
+	//Recursive method: Method that calls itself
+	//After each tile is revealed, check surrounding tiles for type 0, then reveal them
+	public void revealTiles(Vector2I pos, Tile[,] map){
+		SetCell(pos, 6, (Vector2I)parent.numbers[0], 0);
+		Tile clicked = map[(pos[0]+7),(pos[1]+7)];
+		clicked.revealed = true;
+		int clickedX = clicked.position[0]+7;
+		int clickedY = clicked.position[1]+7;
+
+		if(clicked.type == 0){
+			//Check surrounding tiles (similar code to mainGameCode for identifying surrounding bombs)
+			for(int a = -1; a<=1; a++){
+				for(int b = -1; b<=1; b++){
+					//Checking if tile is on the map
+					if((a + clickedX < 15 && a + clickedX > -1)&&(b+clickedY < 15 && clickedY+b >-1)){
+						if(map[(clickedX+a),(clickedY+b)].type==0 && !map[(clickedX+a),(clickedY+b)].revealed){
+							revealTiles(map[(clickedX+a),(clickedY+b)].position, map);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	//Check if a bomb tile has been clicked
