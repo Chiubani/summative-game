@@ -30,7 +30,7 @@ public partial class Flags : TileMapLayer{
 				//If the tile has not been revealed already:
 
 				if(!tileRevealed(tilePosition, parent.board)){
-					if(tilePosition[0]<8 && tilePosition[1]<8 && flagCount<parent.bombsAmount){
+					if(tilePosition[0]<8 && tilePosition[1]<8 && flagCount<parent.bombsAmount && !parent.gameOver){
 						
 						if (Array.IndexOf(parent.flagsPlaced, tilePosition) == -1){
 							SetCell(tilePosition, 1, (Vector2I)parent.flag, 0);
